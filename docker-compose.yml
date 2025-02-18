@@ -1,0 +1,16 @@
+version: '1'
+services:
+  env-side:
+    container_name: env-side-1
+    privileged: true
+    tty: true
+    build:
+      context: ./
+      args:
+        environment: development
+    ports:
+      - "3003:3000"
+    volumes:
+      - ~/code:/root/code
+    command: /bin/bash
+
