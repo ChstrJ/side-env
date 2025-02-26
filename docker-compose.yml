@@ -10,5 +10,6 @@ services:
       - "3003:3000"
     volumes:
       - ~/code:/root/code
+      - ~/.ssh:/root/.ssh:ro
     command: /bin/bash
 
