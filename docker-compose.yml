@@ -1,7 +1,5 @@
-version: '1'
 services:
   env-side:
-    container_name: env-side-1
     privileged: true
     tty: true
     build:
