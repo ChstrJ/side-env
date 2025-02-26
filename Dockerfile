@@ -2,8 +2,6 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN yes | unminimize
-
 # Update and install basic tools
 RUN apt-get update && apt-get install -y \
     git \
@@ -43,11 +41,12 @@ RUN apt-get update && apt-get install -y \
     php-dev \
     php-gd
 
-# Install Node.js LTS (using NodeSource PPA)
+
+# Node js
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
     && apt-get install -y nodejs
 
-# Install Neovim from source
+# Neovim
 RUN git clone https://github.com/neovim/neovim /tmp/neovim && \
     cd /tmp/neovim && \
     make CMAKE_BUILD_TYPE=Release && \
@@ -55,8 +54,15 @@ RUN git clone https://github.com/neovim/neovim /tmp/neovim && \
     cd / && \
     rm -rf /tmp/neovim
 
-# Install Composer
+# Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set the working directory
+# Move ssh files to container
+COPY ssh /root/.ssh
+COPY alias /root
+
+# Set permissions
+RUN chmod 600 /root/.ssh/*
+
+# Working dir
 WORKDIR /root
