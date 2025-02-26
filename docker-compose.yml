@@ -1,5 +1,6 @@
 services:
-  env-side:
+  app:
+    image: env-side
     privileged: true
     tty: true
     build:
@@ -7,7 +8,8 @@ services:
       args:
         environment: development
     ports:
-      - "3003:3000"
+      - "3001:3000"
+      - "8001:8000"
     volumes:
       - ~/code:/root/code
       - ~/.ssh:/root/.ssh:ro
