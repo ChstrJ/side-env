@@ -58,7 +58,6 @@ RUN git clone https://github.com/neovim/neovim /tmp/neovim && \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Move ssh files to container
-COPY ssh /root/.ssh
 COPY alias /root
 
 # Set permissions
